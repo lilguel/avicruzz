@@ -1,0 +1,275 @@
+﻿@page "/usuarios"
+
+@using avicruz.Models
+@using avicruz.Services
+
+@inject AuthService AuthService
+@inject IJSRuntime JS
+@inject EstadoSesion Sesion
+@inject NavigationManager Nav
+
+<div class="page-container">
+    <h1 class="section-title">Gestión de Usuarios</h1>
+
+    <!-- ================= FORMULARIO CREAR USUARIO ================= -->
+    <div class="form-card">
+        <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 25px; color: var(--text-dark);">
+            <i class="fas fa-user-plus" style="color: var(--primary-green);"></i> Crear Nuevo Usuario
+        </h2>
+
+        <div class="form-group">
+            <label class="form-label">Nombre de Usuario</label>
+            <input type="text" placeholder="ej: empleado1" @bind="nuevoUsuario" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Contraseña</label>
+            <input type="password" placeholder="Ingresa contraseña" @bind="nuevoPassword" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Rol</label>
+            <select @bind="nuevoRol" class="form-control">
+                <option>Administrador</option>
+                <option>Empleado</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-green" @onclick="CrearUsuario" disabled="@cargandoCrear">
+                <i class="fas fa-save"></i> @(cargandoCrear ? "Creando..." : "Crear Usuario")
+            </button>
+            <button class="btn-dark" @onclick="RecargarUsuarios">
+                <i class="fas fa-sync-alt"></i> Recargar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= TABLA USUARIOS ================= -->
+<div class="page-container">
+    <h2 class="section-title">Usuarios Registrados</h2>
+
+    @if (cargandoTabla)
+    {
+        <div class="state-container">
+            <i class="fas fa-spinner fa-spin state-icon"></i>
+            <p style="margin-top: 10px;">Cargando usuarios...</p>
+        </div>
+    }
+    else if (usuarios == null || usuarios.Count == 0)
+    {
+        <div class="state-container empty-box">
+            <i class="fas fa-inbox state-icon-large"></i>
+            <p>No hay usuarios registrados aún.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Contraseña</th>
+                        <th>Rol</th>
+                        <th class="text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var u in usuarios)
+                    {
+                        <tr>
+                            <td>@u.id</td>
+                            <td><strong>@u.usuario</strong></td>
+                            <td>
+                                <code style="background-color: #f1fbf7; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
+                                    @("*".PadRight(u.password.ToString().Length, '*'))
+                                </code>
+                            </td>
+                            <td>
+                                <span class="badge @(u.rol == "Administrador" ? "badge-primary" : "badge-info")">
+                                    @u.rol
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <button @onclick="() => ConfirmarEliminar(u.id, u.usuario)" class="btn-delete-row" title="Eliminar Usuario">
+                                    🗑️ Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Usuario> usuarios = new();
+    private bool cargandoTabla = false;
+    private bool cargandoCrear = false;
+
+    // Formulario crear usuario
+    private string nuevoUsuario = "";
+    private string nuevoPassword = "";
+    private string nuevoRol = "Empleado";
+
+    // ================= INICIO =================
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("🔍 Verificando acceso a página usuarios...");
+        Console.WriteLine($"UsuarioActual: {Sesion.UsuarioActual?.usuario ?? "NULL"}");
+        Console.WriteLine($"Rol: {Sesion.UsuarioActual?.rol ?? "NULL"}");
+
+        // Verificar si es administrador
+        if (Sesion.UsuarioActual == null)
+        {
+            Console.WriteLine("❌ Usuario no autenticado");
+            await JS.InvokeVoidAsync("alert", "No tienes sesión iniciada. Por favor inicia sesión.");
+            Nav.NavigateTo("/");
+            return;
+        }
+
+        if (Sesion.UsuarioActual.rol != "Administrador" && Sesion.UsuarioActual.rol != "Admin")
+        {
+            Console.WriteLine($"❌ Rol insuficiente: {Sesion.UsuarioActual.rol}");
+            await JS.InvokeVoidAsync("alert", "No tienes permiso. Solo administradores pueden acceder.");
+            Nav.NavigateTo("/");
+            return;
+        }
+
+        Console.WriteLine($"✅ Acceso permitido. Usuario: {Sesion.UsuarioActual.usuario}");
+        await CargarUsuarios();
+    }
+
+    // ================= CARGAR USUARIOS =================
+    private async Task CargarUsuarios()
+    {
+        cargandoTabla = true;
+        try
+        {
+            Console.WriteLine("🔄 Cargando usuarios...");
+            usuarios = await AuthService.ObtenerUsuarios();
+            Console.WriteLine($"✅ Usuarios cargados: {usuarios?.Count ?? 0}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Error: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", "Error al cargar usuarios: " + ex.Message);
+        }
+        finally
+        {
+            cargandoTabla = false;
+        }
+    }
+
+    // ================= RECARGAR USUARIOS =================
+    private async Task RecargarUsuarios()
+    {
+        await CargarUsuarios();
+    }
+
+    // ================= CREAR USUARIO =================
+    private async Task CrearUsuario()
+    {
+        // Validar campos
+        if (string.IsNullOrWhiteSpace(nuevoUsuario))
+        {
+            await JS.InvokeVoidAsync("alert", "Por favor ingresa un nombre de usuario");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(nuevoPassword))
+        {
+            await JS.InvokeVoidAsync("alert", "Por favor ingresa una contraseña");
+            return;
+        }
+
+        if (nuevoPassword.Length < 4)
+        {
+            await JS.InvokeVoidAsync("alert", "La contraseña debe tener al menos 4 caracteres");
+            return;
+        }
+
+        // Verificar si el usuario ya existe
+        if (usuarios.Any(u => u.usuario.ToLower() == nuevoUsuario.ToLower()))
+        {
+            await JS.InvokeVoidAsync("alert", "El usuario ya existe");
+            return;
+        }
+
+        cargandoCrear = true;
+        try
+        {
+            Console.WriteLine($"💾 Creando usuario: {nuevoUsuario}");
+
+            var res = await AuthService.CrearUsuario(nuevoUsuario, nuevoPassword, nuevoRol);
+
+            if (res.Contains("OK") || res.Contains("ok") || res == "")
+            {
+                await JS.InvokeVoidAsync("alert", "✅ Usuario creado exitosamente");
+
+                // Limpiar formulario
+                nuevoUsuario = "";
+                nuevoPassword = "";
+                nuevoRol = "Empleado";
+
+                // Recargar usuarios
+                await Task.Delay(500);
+                await CargarUsuarios();
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("alert", "Error: " + res);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Error: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", "Error al crear usuario: " + ex.Message);
+        }
+        finally
+        {
+            cargandoCrear = false;
+        }
+    }
+
+    // ================= CONFIRMAR ELIMINAR =================
+    private async Task ConfirmarEliminar(int id, string usuario)
+    {
+        var confirmar = await JS.InvokeAsync<bool>("confirm", $"¿Deseas eliminar el usuario '{usuario}'?");
+
+        if (confirmar)
+        {
+            await EliminarUsuario(id);
+        }
+    }
+
+    // ================= ELIMINAR USUARIO =================
+    private async Task EliminarUsuario(int id)
+    {
+        try
+        {
+            Console.WriteLine($"🗑️ Eliminando usuario ID: {id}");
+
+            var res = await AuthService.EliminarUsuario(id);
+
+            if (res.Contains("OK") || res.Contains("ok") || res == "")
+            {
+                await JS.InvokeVoidAsync("alert", "✅ Usuario eliminado exitosamente");
+                await CargarUsuarios();
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("alert", "Error: " + res);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Error: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", "Error al eliminar usuario: " + ex.Message);
+        }
+    }
+}

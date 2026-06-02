@@ -1,0 +1,305 @@
+﻿@page "/registro-ventas"
+
+@using avicruz.Models
+@using avicruz.Services
+
+@inject VentaService VentaService
+@inject IJSRuntime JS
+@inject EstadoSesion Sesion
+@inject NavigationManager Nav
+
+<div class="page-container">
+    <h1 class="section-title">Registro de Ventas</h1>
+
+    <div class="form-card">
+        <div class="form-group">
+            <label class="form-label">Fecha</label>
+            <input type="date" @bind="fecha" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Tipo</label>
+            <select @bind="tipo" class="form-control">
+                <option>Primera</option>
+                <option>Segunda</option>
+                <option>Tercera</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Cantidad</label>
+            <input type="number" placeholder="0" @bind="cantidad" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Precio</label>
+            <input type="number" placeholder="0.00" @bind="precio" step="0.01" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Pagado</label>
+            <select @bind="pagado" class="form-control">
+                <option value="SI">Si</option>
+                <option value="NO">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Tienda</label>
+            <select @bind="tienda" class="form-control">
+                <option>Tienda 1</option>
+                <option>Tienda 2</option>
+                <option>Tienda 3</option>
+                <option>Tienda 4</option>
+                <option>Tienda 5</option>
+                <option>Tienda 6</option>
+                <option>Tienda 7</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-green" @onclick="Guardar" disabled="@cargando">
+                <i class="fas fa-save"></i> @(cargando ? "Guardando..." : "Guardar Venta")
+            </button>
+            <button class="btn-dark" @onclick="RecargarVentas">
+                <i class="fas fa-sync-alt"></i> Recargar
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="page-container">
+    <div class="filter-container">
+        <h2 class="section-title filter-title">Ventas Registradas</h2>
+
+        <div class="filter-card">
+            <label class="filter-label">Filtrar por Tienda:</label>
+            <select @bind="filtroTienda" class="filter-select">
+                <option value="">🏪 Todas las Tiendas</option>
+                <option value="Tienda 1">Tienda 1</option>
+                <option value="Tienda 2">Tienda 2</option>
+                <option value="Tienda 3">Tienda 3</option>
+                <option value="Tienda 4">Tienda 4</option>
+                <option value="Tienda 5">Tienda 5</option>
+                <option value="Tienda 6">Tienda 6</option>
+                <option value="Tienda 7">Tienda 7</option>
+            </select>
+
+            <label class="filter-label">Filtrar por:</label>
+            <select @bind="filtroPago" class="filter-select">
+                <option value="TODAS">📋 Mostrar Todas</option>
+                <option value="NO">❌ Por Cobrar (Pendientes)</option>
+                <option value="SI">✅ Ya Pagadas</option>
+            </select>
+        </div>
+    </div>
+
+    @if (cargandoTabla)
+    {
+        <div class="state-container">
+            <i class="fas fa-spinner fa-spin state-icon"></i>
+            <p style="margin-top: 10px;">Cargando ventas...</p>
+        </div>
+    }
+    else if (ventas == null || ventas.Count == 0)
+    {
+        <div class="state-container empty-box">
+            <i class="fas fa-inbox state-icon-large"></i>
+            <p>No hay ventas registradas aún.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Tienda</th>
+                        <th>Tipo</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Pagado</th>
+                        <th class="text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var v in VentasFiltradas)
+                    {
+                        <tr>
+                            <td>@v.id</td>
+                            <td>@v.fecha</td>
+                            <td><strong>@v.tienda</strong></td>
+                            <td>@v.tipo</td>
+                            <td>@v.cantidad</td>
+                            <td>$@v.precio.ToString("F2")</td>
+                            <td class="text-success-bold">$@v.total.ToString("F2")</td>
+                            <td>
+                                <span class="badge @(v.pagado == "SI" ? "badge-success" : "badge-danger")">
+                                    @v.pagado
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <button @onclick="() => Eliminar(v.id)" class="btn-delete-row" title="Eliminar Venta">
+                                    🗑️ Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    // ================= VARIABLES =================
+    private DateTime fecha = DateTime.Now;
+    private string tipo = "Primera";
+    private int cantidad = 0;
+    private decimal precio = 0;
+    private string pagado = "SI";
+    private string tienda = "Tienda 1";
+
+    private List<Venta> ventas = new();
+    private bool cargando = false;
+    private bool cargandoTabla = false;
+
+    // Variables para filtros
+    private string filtroPago = "TODAS";
+    private string filtroTienda = "";
+
+    // Propiedad para filtrar ventas
+    private List<Venta> VentasFiltradas =>
+        ventas
+            .Where(v => (filtroPago == "TODAS" || v.pagado == filtroPago))
+            .Where(v => (string.IsNullOrEmpty(filtroTienda) || v.tienda == filtroTienda))
+            .ToList();
+
+    // ================= INICIO =================
+    protected override async Task OnInitializedAsync()
+    {
+        // Verificamos que alguien haya iniciado sesión
+        if (Sesion.UsuarioActual == null)
+        {
+            Nav.NavigateTo("/");
+            return;
+        }
+
+        await CargarVentas();
+    }
+
+    // ================= CARGAR VENTAS =================
+    private async Task CargarVentas()
+    {
+        cargandoTabla = true;
+        try
+        {
+            ventas = await VentaService.ObtenerVentas();
+            Console.WriteLine($"Ventas cargadas: {ventas?.Count ?? 0}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar ventas: {ex.Message}");
+        }
+        finally
+        {
+            cargandoTabla = false;
+        }
+    }
+
+    // ================= RECARGAR VENTAS =================
+    private async Task RecargarVentas()
+    {
+        await CargarVentas();
+    }
+
+    // ================= GUARDAR =================
+    private async Task Guardar()
+    {
+        if (cantidad <= 0 || precio <= 0)
+        {
+            await JS.InvokeVoidAsync("alert", "Por favor completa todos los campos correctamente");
+            return;
+        }
+
+        cargando = true;
+        try
+        {
+            var v = new Venta
+            {
+                fecha = fecha.ToString("yyyy-MM-dd"),
+                tipo = tipo,
+                cantidad = cantidad,
+                precio = precio,
+                pagado = pagado,
+                tienda = tienda,
+                total = cantidad * precio
+            };
+
+            var res = await VentaService.GuardarVenta(v);
+
+            if (res.Contains("OK") || res.Contains("ok"))
+            {
+                await JS.InvokeVoidAsync("alert", "Venta guardada exitosamente ✔");
+
+                await Task.Delay(500);
+                await CargarVentas();
+
+                // Reset formulario
+                fecha = DateTime.Now;
+                tipo = "Primera";
+                cantidad = 0;
+                precio = 0;
+                pagado = "SI";
+                tienda = "Tienda 1";
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("alert", "Error al guardar: " + res);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            await JS.InvokeVoidAsync("alert", "Error al guardar la venta: " + ex.Message);
+        }
+        finally
+        {
+            cargando = false;
+        }
+    }
+
+    // ================= ELIMINAR =================
+    private async Task Eliminar(long id)
+    {
+        var confirmar = await JS.InvokeAsync<bool>("confirm", "¿Deseas eliminar esta venta?");
+        if (confirmar)
+        {
+            try
+            {
+                Console.WriteLine($"🗑️ Eliminando venta ID: {id}");
+
+                var respuesta = await VentaService.Eliminar(id);
+
+                if (respuesta.Contains("ERROR") || respuesta.Contains("Error"))
+                {
+                    await JS.InvokeVoidAsync("alert", "Respuesta de Google: " + respuesta);
+                }
+                else
+                {
+                    await JS.InvokeVoidAsync("alert", "Venta eliminada exitosamente ✔");
+                }
+
+                await CargarVentas(); // Refresca la tabla automáticamente
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error al eliminar: {ex.Message}");
+                await JS.InvokeVoidAsync("alert", "Error al eliminar: " + ex.Message);
+            }
+        }
+    }
+}

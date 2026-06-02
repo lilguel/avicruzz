@@ -1,0 +1,101 @@
+﻿@page "/dashboard-admin"
+@using avicruz.Services
+@inject NavigationManager Nav
+@inject EstadoSesion Sesion
+
+<div class="dashboard-bg">
+
+    <div class="dashboard-container">
+
+        <div class="dashboard-header">
+
+            <div class="dashboard-title">
+                <h1>🐔 AVICRUZ</h1>
+                <p>Panel de Administración</p>
+            </div>
+
+            <button class="logout-btn" @onclick="CerrarSesion">
+                Cerrar Sesión
+            </button>
+
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <h2>25</h2>
+                <span>Ventas Hoy</span>
+            </div>
+
+            <div class="stat-card">
+                <h2>2</h2>
+                <span>Usuarios</span>
+            </div>
+
+            <div class="stat-card">
+                <h2>2450</h2>
+                <span>Huevos Vendidos</span>
+            </div>
+
+        </div>
+
+        <div class="cards-grid">
+
+            <div class="menu-card" @onclick="IrVentas">
+                <div class="icon">📊</div>
+                <h3>Registrar Ventas</h3>
+                <p>Control diario de ventas</p>
+            </div>
+
+            <div class="menu-card" @onclick="IrUsuarios">
+                <div class="icon">👥</div>
+                <h3>Usuarios</h3>
+                <p>Gestionar empleados y accesos</p>
+            </div>
+
+            <div class="menu-card" @onclick="IrReportes">
+                <div class="icon">📈</div>
+                <h3>Reportes</h3>
+                <p>Gráficas y estadísticas</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+    // ESTE MÉTODO SE EJECUTA AL CARGAR LA PÁGINA
+    protected override void OnInitialized()
+    {
+        // Verificamos si hay alguien logueado y si su rol es Admin
+        if (Sesion.UsuarioActual == null || Sesion.UsuarioActual.rol != "Admin")
+        {
+            // Si copiaron la URL o no tienen permiso, los botamos
+            Nav.NavigateTo("/loginadmin");
+        }
+    }
+
+    void IrVentas()
+    {
+        Nav.NavigateTo("/registro-ventas");
+    }
+
+    void IrUsuarios()
+    {
+        Nav.NavigateTo("/usuarios");
+    }
+
+    void IrReportes()
+    {
+        Nav.NavigateTo("/reportes");
+    }
+
+    void CerrarSesion()
+    {
+        // LIMPIAMOS LA SESIÓN AL SALIR
+        Sesion.UsuarioActual = null;
+        Nav.NavigateTo("/");
+    }
+}

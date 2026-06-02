@@ -1,0 +1,129 @@
+﻿@page "/cuentas-cobrar"
+
+@using avicruz.Models
+@using avicruz.Services
+
+@inject VentaService VentaService
+@inject IJSRuntime JS
+@inject EstadoSesion Sesion
+@inject NavigationManager Nav
+
+<div class="page-container">
+    <h1 class="section-title">Cuentas por Cobrar</h1>
+    <p style="color: var(--light); margin-bottom: 20px;">Gestiona los pagos pendientes de los clientes.</p>
+
+    @if (cargandoTabla)
+    {
+        <div class="state-container">
+            <i class="fas fa-spinner fa-spin state-icon"></i>
+            <p style="margin-top: 10px;">Cargando deudas...</p>
+        </div>
+    }
+    else if (VentasPendientes == null || !VentasPendientes.Any())
+    {
+        <div class="state-container empty-box">
+            <i class="fas fa-check-circle state-icon-large" style="color: var(--primary);"></i>
+            <p>¡Excelente! No hay cuentas por cobrar en este momento.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var v in VentasPendientes)
+                    {
+                        <tr>
+                            <td>@v.id</td>
+                            <td>@v.fecha</td>
+                            <td>@v.tipo</td>
+                            <td>@v.cantidad</td>
+                            <td class="text-success-bold">$@v.total.ToString("F2")</td>
+                            <td class="text-center">
+                                <span class="badge badge-danger">Pendiente</span>
+                            </td>
+                            <td class="text-center">
+                                <button @onclick="() => Cobrar(v.id)" class="btn-green" style="padding: 6px 12px; font-size: 14px;" title="Marcar como pagado">
+                                    💰 Cobrar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Venta> ventas = new();
+    private bool cargandoTabla = false;
+
+    // Filtramos automáticamente usando LINQ para que SOLO muestre los que deben (pagado == "NO")
+    private IEnumerable<Venta> VentasPendientes => ventas.Where(v => v.pagado == "NO");
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Sesion.UsuarioActual == null)
+        {
+            Nav.NavigateTo("/");
+            return;
+        }
+
+        await CargarVentas();
+    }
+
+    private async Task CargarVentas()
+    {
+        cargandoTabla = true;
+        try
+        {
+            ventas = await VentaService.ObtenerVentas();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar ventas: {ex.Message}");
+        }
+        finally
+        {
+            cargandoTabla = false;
+        }
+    }
+
+    private async Task Cobrar(long id)
+    {
+        var confirmar = await JS.InvokeAsync<bool>("confirm", "¿Confirmas que el cliente ya pagó esta venta?");
+        if (confirmar)
+        {
+            try
+            {
+                var respuesta = await VentaService.MarcarComoPagado(id);
+
+                if (respuesta.Contains("ERROR") || respuesta.Contains("Error"))
+                {
+                    await JS.InvokeVoidAsync("alert", "Error al procesar: " + respuesta);
+                }
+                else
+                {
+                    await JS.InvokeVoidAsync("alert", "Pago registrado exitosamente ✔");
+                    await CargarVentas(); // Recarga la tabla y la fila desaparecerá porque ya no es "NO"
+                }
+            }
+            catch (Exception ex)
+            {
+                await JS.InvokeVoidAsync("alert", "Error: " + ex.Message);
+            }
+        }
+    }
+}

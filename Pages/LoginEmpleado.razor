@@ -1,0 +1,55 @@
+@using avicruz.Services
+@page "/loginempleado"
+@inject AuthService Auth
+@inject NavigationManager Nav
+@inject EstadoSesion Sesion
+
+<div class="bg">
+
+    <div class="glass-card">
+
+        <h2>👷 Empleado</h2>
+        <p>Acceso al sistema</p>
+
+        <input placeholder="Usuario" @bind="usuario" />
+        <input type="password" placeholder="Contraseña" @bind="password" />
+
+        <button class="btn" @onclick="Login">Ingresar</button>
+
+        @if (!string.IsNullOrEmpty(error))
+        {
+            <p class="error">@error</p>
+        }
+
+    </div>
+
+</div>
+
+@code {
+    string usuario = "";
+    string password = "";
+    string error = "";
+
+    async Task Login()
+    {
+        error = "";
+        var user = await Auth.Login(usuario, password);
+
+        if (user == null)
+        {
+            error = "Credenciales incorrectas";
+            return;
+        }
+
+        if (user.rol == "Empleado")
+        {
+            // GUARDAMOS EL USUARIO EN LA SESIÓN
+            Sesion.UsuarioActual = user;
+            Nav.NavigateTo("/dashboard-empleado");
+        }
+        else
+        {
+            error = "No tienes acceso";
+        }
+    }
+}

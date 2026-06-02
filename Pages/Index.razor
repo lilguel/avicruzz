@@ -1,0 +1,81 @@
+@page "/"
+@inject NavigationManager Nav
+@inject IJSRuntime JSRuntime
+
+<div class="bg">
+    <div class="card">
+
+        <img src="logo.jpeg" class="logo" />
+
+        <h1>Avicruz</h1>
+        <p>Sistema de gestión avícola inteligente</p>
+
+        @if (!string.IsNullOrEmpty(mensajeStatus))
+        {
+            <p style="color: #0078D4; font-weight: bold; font-size: 14px; margin-bottom: 15px; padding: 10px; background-color: #f3f9ff; border-radius: 5px;">
+                @mensajeStatus
+            </p>
+        }
+
+        <button class="btn admin" @onclick="GoAdminConCelular">
+            Administrador
+        </button>
+
+        <button class="btn employee" @onclick="GoEmpleado">
+            Empleado
+        </button>
+
+        <!-- ================= <button class="btn" style="background-color: transparent; border: 1px dashed #999; color: #555; margin-top: 20px; font-size: 12px; padding: 5px 10px;" @onclick="VincularCelular">
+            📱 Vincular mi Celular (Solo 1ra vez)
+        </button> ================= -->
+
+
+        <button class="btn" style="background-color: transparent; border: 1px dashed #999; color: #555; margin-top: 20px; font-size: 12px; padding: 5px 10px;" @onclick="VincularCelular">
+            📱 Vincular mi Celular (Solo 1ra vez)
+        </button>
+
+    </div>
+</div>
+
+@code {
+    private string mensajeStatus = "";
+
+    async Task VincularCelular()
+    {
+        mensajeStatus = "Aparecerá una ventana de Windows. Escanea el QR con tu cámara y pon tu huella.";
+        StateHasChanged();
+
+        bool exito = await JSRuntime.InvokeAsync<bool>("registrarCelularInalambrico");
+
+        if (exito)
+        {
+            mensajeStatus = "¡Celular vinculado exitosamente! Tu dispositivo ya es la llave.";
+        }
+        else
+        {
+            mensajeStatus = "Error o cancelación al intentar vincular el celular.";
+        }
+        StateHasChanged();
+    }
+
+    async Task GoAdminConCelular()
+    {
+        mensajeStatus = "Revisa tu celular o escanea el QR en pantalla...";
+        StateHasChanged();
+
+        bool accesoPermitido = await JSRuntime.InvokeAsync<bool>("pedirCelularInalambrico");
+
+        if (accesoPermitido)
+        {
+            mensajeStatus = "¡Huella verificada!";
+            Nav.NavigateTo("/loginadmin");
+        }
+        else
+        {
+            mensajeStatus = "Acceso denegado. No se pudo verificar la huella.";
+            StateHasChanged();
+        }
+    }
+
+    void GoEmpleado() => Nav.NavigateTo("/loginempleado");
+}

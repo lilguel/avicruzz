@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avicruz</title>
+    <base href="/" />
+    <link href="css/app.css?v=3" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">Loading...</div>
+
+    <div id="blazor-error-ui">
+        <a href="" class="reload">Recargar</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+        window.registrarCelularInalambrico = async () => {
+            try {
+                const randomChallenge = new Uint8Array(32);
+                window.crypto.getRandomValues(randomChallenge);
+                const randomUserId = new Uint8Array(16);
+                window.crypto.getRandomValues(randomUserId);
+
+                const opciones = {
+                    publicKey: {
+                        rp: { name: "Avicruz", id: window.location.hostname },
+                        user: { id: randomUserId, name: "admin@avicruz.com", displayName: "Administrador" },
+                        challenge: randomChallenge,
+                        pubKeyCredParams: [
+                            { type: "public-key", alg: -7 },
+                            { type: "public-key", alg: -257 }
+                        ],
+                        timeout: 60000,
+                        authenticatorSelection: {
+                            authenticatorAttachment: "cross-platform",
+                            userVerification: "required"
+                        }
+                    }
+                };
+
+                const credencial = await navigator.credentials.create(opciones);
+                return credencial ? true : false;
+            } catch (error) {
+                console.error("Error al vincular el celular:", error);
+                return false;
+            }
+        };
+
+        window.pedirCelularInalambrico = async () => {
+            try {
+                const randomChallenge = new Uint8Array(32);
+                window.crypto.getRandomValues(randomChallenge);
+
+                const opciones = {
+                    publicKey: {
+                        challenge: randomChallenge,
+                        timeout: 60000,
+                        userVerification: "required"
+                    }
+                };
+
+                const credencial = await navigator.credentials.get(opciones);
+                return credencial ? true : false;
+            } catch (error) {
+                console.error("Error al autenticar:", error);
+                return false;
+            }
+        };
+    </script>
+</body>
+</html>

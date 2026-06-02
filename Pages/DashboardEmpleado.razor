@@ -1,0 +1,66 @@
+﻿@page "/dashboard-empleado"
+@using avicruz.Services
+@implements IDisposable
+@inject NavigationManager Nav
+@inject EstadoSesion Sesion
+
+<div class="dashboard-bg" style="zoom: @(Sesion.NivelZoom)%;">
+    <div class="dashboard-container">
+
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>🐔 AVICRUZ</h1>
+                <p>Panel Operativo | Bienvenido(a) @(Sesion.UsuarioActual?.usuario)</p>
+            </div>
+
+            <button class="logout-btn" @onclick="CerrarSesion">
+                Cerrar Sesión
+            </button>
+        </div>
+
+        <div class="cards-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 800px; margin: 0 auto;">
+            <div class="menu-card" @onclick="IrVentas">
+                <div class="icon">🛒</div>
+                <h3>Punto de Venta</h3>
+                <p>Registrar y revisar ventas de huevos</p>
+            </div>
+
+            <div class="menu-card" @onclick='() => Nav.NavigateTo("/cuentas-cobrar")'>
+                <div class="icon">📝</div>
+                <h3>Cuentas por Cobrar</h3>
+                <p>Gestionar ventas no pagadas</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="zoom-widget">
+    <span class="zoom-text">🔍 Zoom: @(Sesion.NivelZoom)%</span>
+    <input type="range" min="80" max="150" @bind="Sesion.NivelZoom" @bind:event="oninput" class="zoom-slider" />
+</div>
+@code {
+    protected override void OnInitialized()
+    {
+        if (Sesion.UsuarioActual == null || Sesion.UsuarioActual.rol != "Empleado")
+        {
+            Nav.NavigateTo("/loginempleado");
+            return;
+        }
+
+        Sesion.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        Sesion.OnChange -= StateHasChanged;
+    }
+
+    void IrVentas() => Nav.NavigateTo("/registro-ventas");
+
+    void CerrarSesion()
+    {
+        Sesion.UsuarioActual = null;
+        Nav.NavigateTo("/");
+    }
+}

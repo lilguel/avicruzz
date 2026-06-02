@@ -1,0 +1,556 @@
+﻿@page "/reportes"
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-container">
+
+        <nav class="top-nav">
+            <div class="logo">
+                <i class="fas fa-egg" style="color: var(--primary);"></i> <span>Avicruz</span>
+            </div>
+
+            <div class="nav-pills">
+                <a href="#" class="@(tabActiva == "Panel" ? "active" : "")"
+                   @onclick='() => tabActiva = "Panel"' @onclick:preventDefault="true">Panel</a>
+
+                <a href="#" class="@(tabActiva == "Mapa" ? "active" : "")"
+                   @onclick='() => tabActiva = "Mapa"' @onclick:preventDefault="true">Mapa</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="user-avatar"><img src="Dr.Diego.jpeg" alt="User"></div>
+            </div>
+        </nav>
+
+        @if (tabActiva == "Panel")
+        {
+            <div class="dashboard-grid">
+                <!-- Dashboard Financiero Integrado (Ancho completo) -->
+                <div class="card col-span-4" style="min-height: 75vh; padding: 0; overflow: hidden; border: none; box-shadow: none;">
+                    <iframe srcdoc="@chartHtml"
+                            style="width: 100%; height: 100%; min-height: 75vh; border: 0;"
+                            scrolling="no">
+                    </iframe>
+                </div>
+            </div>
+        }
+        else if (tabActiva == "Mapa")
+        {
+            <div class="card" style="width: 100%; padding: 0; overflow: hidden; border-radius: 20px;">
+                <div style="padding: 24px 24px 16px 24px; border-bottom: 1px solid #f1f5f9;">
+                    <h3 style="font-size: 18px; font-weight: 600; margin: 0; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-fire" style="color: #ef4444;"></i> Mapa de Calor - Ventas
+                    </h3>
+                </div>
+
+                <div style="width: 100%; height: 70vh; min-height: 600px; background-color: #f8f9fa; position: relative;">
+                    <iframe srcdoc="@mapHtml"
+                            style="width: 100%; height: 100%; border: 0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private string tabActiva = "Panel";
+
+    private string chartHtml = @"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <script src=""https://cdn.jsdelivr.net/npm/chart.js""></script>
+            <link href=""https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"" rel=""stylesheet"">
+            <style>
+                * { box-sizing: border-box; }
+                body { margin: 0; padding: 10px 0; font-family: 'Poppins', sans-serif; background: transparent; color: #1e293b; width: 100%; }
+                
+                #dashboard { width: 100%; display: flex; flex-direction: column; gap: 20px; }
+
+                /* Estilos para las tarjetas superiores en formato 3x2 */
+                .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+                .kpi-card { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: center; }
+                
+                /* Clase para reducir la altura de tarjetas específicas */
+                .kpi-card.compact { padding: 12px 20px; }
+                .kpi-card.compact .kpi-value { font-size: 22px; margin-top: 4px; }
+                .kpi-card.compact .kpi-subtext { margin-top: 2px; }
+
+                .kpi-title { font-size: 13px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+                .kpi-value { font-size: 26px; font-weight: 700; margin-top: 8px; color: #0f172a; }
+                .kpi-subtext { font-size: 13px; font-weight: 600; margin-top: 4px; }
+                
+                .text-red { color: #ef4444; }
+                .text-green { color: #10b981; }
+                .text-blue { color: #3b71fe; }
+
+                /* Contenedor del gráfico */
+                .chart-wrapper { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); width: 100%; }
+                .chart-container { position: relative; height: 350px; width: 100%; }
+                
+                .loader { text-align: center; font-size: 15px; color: #64748b; font-weight: 600; padding-top: 50px; }
+            </style>
+        </head>
+        <body>
+            <div id=""loading"" class=""loader"">Conectando con Google Sheets y calculando métricas...</div>
+            
+            <div id=""dashboard"" style=""display: none;"">
+                <div class=""kpi-grid"">
+                    <!-- Fila 1: Dinero y Deudas -->
+                    <div class=""kpi-card"">
+                        <div class=""kpi-title"">Presupuesto Total</div>
+                        <div class=""kpi-value text-blue"" id=""lblPresupuesto"">Bs. 0</div>
+                    </div>
+                    <div class=""kpi-card"">
+                        <div class=""kpi-title"">Dinero por Cobrar</div>
+                        <div class=""kpi-value text-red"" id=""lblCobrar"">Bs. 0</div>
+                    </div>
+                    <div class=""kpi-card"">
+                        <div class=""kpi-title"">Mayor Deudor</div>
+                        <div class=""kpi-value"" id=""lblDeudor"" style=""font-size: 20px;"">Ninguno</div>
+                        <div class=""kpi-subtext text-red"" id=""lblDeudaMax"">Bs. 0</div>
+                    </div>
+
+                    <!-- Fila 2: Huevos (Con clase compact para menor altura) -->
+                    <div class=""kpi-card compact"">
+                        <div class=""kpi-title"">Huevos 1ra Vendidos</div>
+                        <div class=""kpi-value"" id=""lblHuevos1ra"">0</div>
+                        <div class=""kpi-subtext"" style=""color: #64748b;"">Unidades</div>
+                    </div>
+                    <div class=""kpi-card compact"">
+                        <div class=""kpi-title"">Huevos 2da Vendidos</div>
+                        <div class=""kpi-value"" id=""lblHuevos2da"">0</div>
+                        <div class=""kpi-subtext"" style=""color: #64748b;"">Unidades</div>
+                    </div>
+                    <div class=""kpi-card compact"">
+                        <div class=""kpi-title"">Huevos 3ra Vendidos</div>
+                        <div class=""kpi-value"" id=""lblHuevos3ra"">0</div>
+                        <div class=""kpi-subtext"" style=""color: #64748b;"">Unidades</div>
+                    </div>
+                </div>
+
+                <div class=""chart-wrapper"">
+                    <div class=""chart-container"">
+                        <canvas id=""ventasChart""></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbxx9-xJcMAVWQoDHttxWLwTI87fgJiq1Ltiqd93WTSYMF5mDL2rCrnVENq2CgWgxBNYiQ/exec?action=ventas';
+
+                fetch(scriptUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('dashboard').style.display = 'flex';
+
+                        let presupuestoTotal = 0;
+                        let dineroPorCobrar = 0;
+                        
+                        let huevosPrimera = 0;
+                        let huevosSegunda = 0;
+                        let huevosTercera = 0;
+
+                        let deudasPorTienda = {};
+                        const ventasPorTienda = {};
+
+                        data.forEach(venta => {
+                            let total = Number(venta.total) || 0;
+                            let cantidad = Number(venta.cantidad) || 0;
+                            let tipo = (venta.tipo || '').toLowerCase();
+                            let tienda = venta.tienda || 'Desconocida';
+                            let pagado = (venta.pagado || 'NO').toUpperCase().trim();
+
+                            ventasPorTienda[tienda] = (ventasPorTienda[tienda] || 0) + total;
+                            presupuestoTotal += total;
+
+                            if (pagado !== 'SI') {
+                                dineroPorCobrar += total;
+                                deudasPorTienda[tienda] = (deudasPorTienda[tienda] || 0) + total;
+                            }
+
+                            // Clasificación de huevos
+                            if (tipo.includes('primera') || tipo.includes('1ra')) {
+                                huevosPrimera += cantidad;
+                            } else if (tipo.includes('segunda') || tipo.includes('2da')) {
+                                huevosSegunda += cantidad;
+                            } else if (tipo.includes('tercera') || tipo.includes('3ra')) {
+                                huevosTercera += cantidad;
+                            }
+                        });
+
+                        let tiendaMasDebe = 'Ninguna';
+                        let maxDeuda = 0;
+                        for (const [t, deuda] of Object.entries(deudasPorTienda)) {
+                            if (deuda > maxDeuda) {
+                                maxDeuda = deuda;
+                                tiendaMasDebe = t;
+                            }
+                        }
+
+                        document.getElementById('lblPresupuesto').innerText = 'Bs. ' + presupuestoTotal.toLocaleString();
+                        document.getElementById('lblCobrar').innerText = 'Bs. ' + dineroPorCobrar.toLocaleString();
+                        
+                        document.getElementById('lblHuevos1ra').innerText = huevosPrimera.toLocaleString();
+                        document.getElementById('lblHuevos2da').innerText = huevosSegunda.toLocaleString();
+                        document.getElementById('lblHuevos3ra').innerText = huevosTercera.toLocaleString();
+                        
+                        document.getElementById('lblDeudor').innerText = tiendaMasDebe;
+                        if (maxDeuda > 0) {
+                            document.getElementById('lblDeudaMax').innerText = 'Debe: Bs. ' + maxDeuda.toLocaleString();
+                        } else {
+                            document.getElementById('lblDeudaMax').innerText = 'Sin deudas pendientes';
+                            document.getElementById('lblDeudaMax').className = 'kpi-subtext text-green';
+                        }
+
+                        const etiquetas = Object.keys(ventasPorTienda);
+                        const valores = Object.values(ventasPorTienda);
+
+                        const ctx = document.getElementById('ventasChart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: etiquetas,
+                                datasets: [{
+                                    label: 'Ingresos Históricos (Bs.)',
+                                    data: valores,
+                                    backgroundColor: ['#3b71fe', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#64748b'],
+                                    borderRadius: 8,
+                                    borderWidth: 0
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: { display: false },
+                                    tooltip: { callbacks: { label: context => 'Bs. ' + context.parsed.y } }
+                                },
+                                scales: {
+                                    y: { beginAtZero: true, grid: { borderDash: [5, 5], color: '#e2e8f0' } },
+                                    x: { grid: { display: false } }
+                                }
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById('loading').innerText = 'Error al cargar los datos financieros.';
+                        document.getElementById('loading').style.color = '#ef4444';
+                    });
+            </script>
+        </body>
+        </html>
+    ";
+
+    private string mapHtml = @"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <link rel=""stylesheet"" href=""https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"" />
+            <script src=""https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js""></script>
+            <script src=""https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js""></script>
+            <link href=""https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"" rel=""stylesheet"">
+            <style>
+                body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+                #map { width: 100vw; height: 100vh; }
+                .leaflet-tile-pane { filter: grayscale(100%) contrast(100%); opacity: 0.6; }
+                .custom-div-wrapper { background: transparent; border: none; }
+                
+                .custom-marker {
+                    background-color: #1e293b;
+                    color: #ffffff;
+                    padding: 6px 12px;
+                    border-radius: 12px;
+                    position: relative;
+                    text-align: center;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+                    white-space: nowrap;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    border: 2px solid #ffffff;
+                }
+                
+                .marker-title {
+                    font-size: 10px;
+                    font-weight: 500;
+                    color: #94a3b8;
+                    text-transform: uppercase;
+                    margin-bottom: 2px;
+                }
+
+                .marker-value {
+                    font-weight: 700;
+                    font-size: 13px;
+                }
+
+                .custom-marker::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -6px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-width: 6px 6px 0;
+                    border-style: solid;
+                    border-color: #1e293b transparent transparent transparent;
+                    display: block;
+                    width: 0;
+                }
+                
+                .info.legend {
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 10px 15px;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                    min-width: 120px;
+                }
+                .gradient-bar {
+                    background: linear-gradient(to right, #0000ff, #00ffff, #00ff00, #ffff00, #ff0000);
+                    height: 8px;
+                    border-radius: 4px;
+                    width: 100%;
+                    margin-bottom: 6px;
+                }
+                .legend-labels {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 11px;
+                    color: #64748b;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+                
+                #map-loading {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1000;
+                    background: white;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #64748b;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+                }
+            </style>
+        </head>
+        <body>
+            <div id=""map-loading"">Conectando datos con el mapa...</div>
+            <div id=""map""></div>
+            <script>
+                var map = L.map('map', { zoomControl: true });
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(map);
+
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbxx9-xJcMAVWQoDHttxWLwTI87fgJiq1Ltiqd93WTSYMF5mDL2rCrnVENq2CgWgxBNYiQ/exec?action=ventas';
+
+                // Coordenadas base asociadas a los nombres de tus tiendas
+                const coordenadasBase = [
+                    { id: 'Tienda 1', nombre: 'Tienda #1', coords: [-17.751154, -63.177992] },
+                    { id: 'Tienda 2', nombre: 'Tienda #2', coords: [-17.773043, -63.170768] },
+                    { id: 'Tienda 3', nombre: 'Tienda #3', coords: [-17.743633, -63.159128] },
+                    { id: 'Tienda 4', nombre: 'Tienda #4', coords: [-17.512483, -63.171055] },
+                    { id: 'Tienda 5', nombre: 'Tienda #5', coords: [-17.508663, -63.161952] },
+                    { id: 'Tienda 6', nombre: 'Tienda #6', coords: [-17.515789, -63.165016] },
+                    { id: 'Tienda 7', nombre: 'Tienda #7', coords: [-17.762084, -63.197258] }
+                ];
+
+                fetch(scriptUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('map-loading').style.display = 'none';
+
+                        let ventasPorTienda = {};
+                        
+                        // Sumar el total vendido por cada tienda
+                        data.forEach(venta => {
+                            let tienda = venta.tienda ? venta.tienda.trim() : 'Desconocida';
+                            let total = Number(venta.total) || 0;
+                            ventasPorTienda[tienda] = (ventasPorTienda[tienda] || 0) + total;
+                        });
+
+                        var bounds = [];
+                        var heatData = [];
+                        var maxVentas = 0;
+
+                        // Determinar el valor máximo para colorear correctamente el mapa de calor
+                        Object.values(ventasPorTienda).forEach(v => {
+                            if (v > maxVentas) maxVentas = v;
+                        });
+                        
+                        if (maxVentas === 0) maxVentas = 1000; // Evitar división por cero
+
+                        coordenadasBase.forEach(function(tienda) {
+                            let totalVendido = ventasPorTienda[tienda.id] || 0;
+                            
+                            heatData.push([tienda.coords[0], tienda.coords[1], totalVendido]);
+
+                            // Crear el icono HTML personalizado
+                            var customIcon = L.divIcon({
+                                className: 'custom-div-wrapper',
+                                html: ""<div class='custom-marker'>"" + 
+                                      ""<div class='marker-title'>"" + tienda.nombre + ""</div>"" +
+                                      ""<div class='marker-value'>Bs. "" + totalVendido.toLocaleString() + ""</div>"" +
+                                      ""</div>"",
+                                iconSize: [80, 46],
+                                iconAnchor: [40, 50] // Ajustado para que apunte exacto al lugar
+                            });
+
+                            L.marker(tienda.coords, {icon: customIcon}).addTo(map);
+                            bounds.push(tienda.coords);
+                        });
+
+                        var heat = L.heatLayer(heatData, {
+                            radius: 70,
+                            blur: 45,
+                            maxZoom: 15,
+                            max: maxVentas,
+                            gradient: {
+                                0.2: 'blue', 0.4: 'cyan', 0.6: 'lime', 0.8: 'yellow', 1.0: 'red'
+                            }
+                        }).addTo(map);
+
+                        if (bounds.length > 0) {
+                            map.fitBounds(bounds, { padding: [80, 80] });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar datos del mapa:', error);
+                        document.getElementById('map-loading').innerText = 'Error al cargar datos';
+                        document.getElementById('map-loading').style.color = 'red';
+                    });
+
+                var legend = L.control({position: 'bottomright'});
+                legend.onAdd = function (map) {
+                    var div = L.DomUtil.create('div', 'info legend');
+                    div.innerHTML = 
+                        '<div class=""gradient-bar""></div>' +
+                        '<div class=""legend-labels""><span>Bajo</span><span>Alto</span></div>';
+                    return div;
+                };
+                legend.addTo(map);
+            </script>
+        </body>
+        </html>
+    ";
+}
+
+<style>
+    :root {
+        --primary: #3b71fe;
+        --bg-color: #f1f5f9;
+        --card-bg: #ffffff;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --radius: 20px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .dashboard-wrapper {
+        background-color: var(--bg-color);
+        min-height: 100vh;
+        padding: 20px; 
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+    }
+
+    .dashboard-container {
+        background-color: #ffffff;
+        border-radius: 30px;
+        padding: 30px; 
+        box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        width: 100%; 
+        max-width: 100%; 
+        margin: 0;
+    }
+
+    .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-pills {
+        display: flex;
+        gap: 10px;
+        background: var(--bg-color);
+        padding: 5px;
+        border-radius: 50px;
+    }
+
+    .nav-pills a {
+        text-decoration: none;
+        color: var(--text-muted);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .nav-pills a.active {
+        background: var(--primary);
+        color: white;
+    }
+
+    .user-avatar img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        width: 100%;
+    }
+
+    .col-span-4 {
+        grid-column: span 4;
+        width: 100%;
+    }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid #e2e8f0;
+        border-radius: var(--radius);
+        padding: 24px;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .card-header h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        color: var(--text-dark);
+    }
+</style>

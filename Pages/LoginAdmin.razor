@@ -1,0 +1,55 @@
+@using avicruz.Services
+@page "/loginadmin"
+@inject AuthService Auth
+@inject NavigationManager Nav
+@inject EstadoSesion Sesion
+
+<div class="bg">
+
+    <div class="glass-card">
+
+        <h2>👨‍💼 Administrador</h2>
+        <p>Inicia sesión para continuar</p>
+
+        <input placeholder="Usuario" @bind="usuario" />
+        <input type="password" placeholder="Contraseña" @bind="password" />
+
+        <button class="btn" @onclick="Login">Ingresar</button>
+
+        @if (!string.IsNullOrEmpty(error))
+        {
+            <p class="error">@error</p>
+        }
+
+    </div>
+
+</div>
+
+@code {
+    string usuario = "";
+    string password = "";
+    string error = "";
+
+    async Task Login()
+    {
+        error = "";
+        var user = await Auth.Login(usuario, password);
+
+        if (user == null)
+        {
+            error = "Credenciales incorrectas";
+            return;
+        }
+
+        if (user.rol == "Administrador" || user.rol == "Admin")
+        {
+            // GUARDAMOS EL USUARIO EN LA SESIÓN
+            Sesion.UsuarioActual = user;
+            Nav.NavigateTo("/dashboard-admin");
+        }
+        else
+        {
+            error = "No eres administrador";
+        }
+    }
+}
