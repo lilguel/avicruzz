@@ -1,0 +1,38 @@
+{
+  "voice": "es-MX-JorgeNeural",
+  "fps": 60,
+  "leadSeconds": 0.25,
+  "tailSeconds": 0.35,
+  "scenes": [
+    {
+      "id": "s1",
+      "title": "Hook",
+      "rate": "+22%",
+      "text": "Tres generaciones. Ninguna aprendió igual. Todas ganaron y perdieron algo."
+    },
+    {
+      "id": "s2",
+      "title": "Generación 1 · sin IA",
+      "rate": "+18%",
+      "text": "Generación uno, sin IA. Lo bueno: fundamentos y paciencia. Lo malo: lentitud y horas perdidas en foros."
+    },
+    {
+      "id": "s3",
+      "title": "Generación 2 · IA en el bolsillo",
+      "rate": "+18%",
+      "text": "Generación dos, IA en el bolsillo. Lo bueno: entiendes en segundos lo que tardaba semanas. Lo malo: copiar sin entender, y una escuela de otra época."
+    },
+    {
+      "id": "s4",
+      "title": "Generación 3 · IA desde el inicio",
+      "rate": "+18%",
+      "text": "Generación tres, educación con IA. Lo bueno: diseñas, verificas y diriges. Lo malo: nadie sabe qué enseñar, y la IA se equivoca con seguridad."
+    },
+    {
+      "id": "s5",
+      "title": "Cheat-sheet",
+      "rate": "+22%",
+      "text": "Resumen. La IA no reemplaza al que entiende. Reemplaza al que solo copia. Guárdalo. ¿De qué generación eres?"
+    }
+  ]
+}

@@ -1,0 +1,633 @@
+{
+ "fps": 60,
+ "leadSeconds": 0.25,
+ "voice": "es-MX-JorgeNeural",
+ "totalFrames": 2818,
+ "scenes": [
+  {
+   "id": "s1",
+   "title": "Hook",
+   "audio": "audio/s1.mp3",
+   "audioSeconds": 5.784,
+   "startSeconds": 0.0,
+   "frames": 383,
+   "words": [
+    {
+     "text": "Tres",
+     "start": 0.091,
+     "end": 0.316,
+     "display": "Tres"
+    },
+    {
+     "text": "generaciones",
+     "start": 0.327,
+     "end": 1.064,
+     "display": "generaciones."
+    },
+    {
+     "text": "Ninguna",
+     "start": 1.762,
+     "end": 2.172,
+     "display": "Ninguna"
+    },
+    {
+     "text": "aprendió",
+     "start": 2.182,
+     "end": 2.561,
+     "display": "aprendió"
+    },
+    {
+     "text": "igual",
+     "start": 2.572,
+     "end": 2.92,
+     "display": "igual."
+    },
+    {
+     "text": "Todas",
+     "start": 3.627,
+     "end": 3.893,
+     "display": "Todas"
+    },
+    {
+     "text": "ganaron",
+     "start": 3.904,
+     "end": 4.242,
+     "display": "ganaron"
+    },
+    {
+     "text": "y",
+     "start": 4.252,
+     "end": 4.293,
+     "display": "y"
+    },
+    {
+     "text": "perdieron",
+     "start": 4.303,
+     "end": 4.744,
+     "display": "perdieron"
+    },
+    {
+     "text": "algo",
+     "start": 4.754,
+     "end": 5.051,
+     "display": "algo."
+    }
+   ],
+   "keywords": []
+  },
+  {
+   "id": "s2",
+   "title": "Generación 1 · sin IA",
+   "audio": "audio/s2.mp3",
+   "audioSeconds": 8.328,
+   "startSeconds": 6.383,
+   "frames": 536,
+   "words": [
+    {
+     "text": "Generación",
+     "start": 0.094,
+     "end": 0.677,
+     "display": "Generación"
+    },
+    {
+     "text": "uno",
+     "start": 0.688,
+     "end": 0.942,
+     "display": "uno,"
+    },
+    {
+     "text": "sin",
+     "start": 1.164,
+     "end": 1.344,
+     "display": "sin"
+    },
+    {
+     "text": "IA",
+     "start": 1.355,
+     "end": 1.673,
+     "display": "IA."
+    },
+    {
+     "text": "Lo",
+     "start": 2.405,
+     "end": 2.542,
+     "display": "Lo"
+    },
+    {
+     "text": "bueno",
+     "start": 2.553,
+     "end": 2.85,
+     "display": "bueno:"
+    },
+    {
+     "text": "fundamentos",
+     "start": 3.051,
+     "end": 3.655,
+     "display": "fundamentos"
+    },
+    {
+     "text": "y",
+     "start": 3.665,
+     "end": 3.697,
+     "display": "y"
+    },
+    {
+     "text": "paciencia",
+     "start": 3.708,
+     "end": 4.269,
+     "display": "paciencia."
+    },
+    {
+     "text": "Lo",
+     "start": 5.0,
+     "end": 5.148,
+     "display": "Lo"
+    },
+    {
+     "text": "malo",
+     "start": 5.159,
+     "end": 5.466,
+     "display": "malo:"
+    },
+    {
+     "text": "lentitud",
+     "start": 5.742,
+     "end": 6.197,
+     "display": "lentitud"
+    },
+    {
+     "text": "y",
+     "start": 6.208,
+     "end": 6.292,
+     "display": "y"
+    },
+    {
+     "text": "horas",
+     "start": 6.303,
+     "end": 6.547,
+     "display": "horas"
+    },
+    {
+     "text": "perdidas",
+     "start": 6.557,
+     "end": 7.013,
+     "display": "perdidas"
+    },
+    {
+     "text": "en",
+     "start": 7.023,
+     "end": 7.14,
+     "display": "en"
+    },
+    {
+     "text": "foros",
+     "start": 7.15,
+     "end": 7.585,
+     "display": "foros."
+    }
+   ],
+   "keywords": []
+  },
+  {
+   "id": "s3",
+   "title": "Generación 2 · IA en el bolsillo",
+   "audio": "audio/s3.mp3",
+   "audioSeconds": 10.416,
+   "startSeconds": 15.317,
+   "frames": 661,
+   "words": [
+    {
+     "text": "Generación",
+     "start": 0.094,
+     "end": 0.677,
+     "display": "Generación"
+    },
+    {
+     "text": "dos",
+     "start": 0.688,
+     "end": 0.984,
+     "display": "dos,"
+    },
+    {
+     "text": "IA",
+     "start": 1.175,
+     "end": 1.408,
+     "display": "IA"
+    },
+    {
+     "text": "en",
+     "start": 1.418,
+     "end": 1.514,
+     "display": "en"
+    },
+    {
+     "text": "el",
+     "start": 1.524,
+     "end": 1.62,
+     "display": "el"
+    },
+    {
+     "text": "bolsillo",
+     "start": 1.63,
+     "end": 2.128,
+     "display": "bolsillo."
+    },
+    {
+     "text": "Lo",
+     "start": 2.85,
+     "end": 2.998,
+     "display": "Lo"
+    },
+    {
+     "text": "bueno",
+     "start": 3.008,
+     "end": 3.316,
+     "display": "bueno:"
+    },
+    {
+     "text": "entiendes",
+     "start": 3.528,
+     "end": 4.004,
+     "display": "entiendes"
+    },
+    {
+     "text": "en",
+     "start": 4.015,
+     "end": 4.1,
+     "display": "en"
+    },
+    {
+     "text": "segundos",
+     "start": 4.11,
+     "end": 4.555,
+     "display": "segundos"
+    },
+    {
+     "text": "lo",
+     "start": 4.566,
+     "end": 4.64,
+     "display": "lo"
+    },
+    {
+     "text": "que",
+     "start": 4.65,
+     "end": 4.756,
+     "display": "que"
+    },
+    {
+     "text": "tardaba",
+     "start": 4.767,
+     "end": 5.138,
+     "display": "tardaba"
+    },
+    {
+     "text": "semanas",
+     "start": 5.148,
+     "end": 5.699,
+     "display": "semanas."
+    },
+    {
+     "text": "Lo",
+     "start": 6.43,
+     "end": 6.578,
+     "display": "Lo"
+    },
+    {
+     "text": "malo",
+     "start": 6.589,
+     "end": 6.907,
+     "display": "malo:"
+    },
+    {
+     "text": "copiar",
+     "start": 7.14,
+     "end": 7.458,
+     "display": "copiar"
+    },
+    {
+     "text": "sin",
+     "start": 7.468,
+     "end": 7.616,
+     "display": "sin"
+    },
+    {
+     "text": "entender",
+     "start": 7.627,
+     "end": 8.03,
+     "display": "entender,"
+    },
+    {
+     "text": "y",
+     "start": 8.284,
+     "end": 8.337,
+     "display": "y"
+    },
+    {
+     "text": "una",
+     "start": 8.347,
+     "end": 8.475,
+     "display": "una"
+    },
+    {
+     "text": "escuela",
+     "start": 8.485,
+     "end": 8.814,
+     "display": "escuela"
+    },
+    {
+     "text": "de",
+     "start": 8.824,
+     "end": 8.93,
+     "display": "de"
+    },
+    {
+     "text": "otra",
+     "start": 8.941,
+     "end": 9.248,
+     "display": "otra"
+    },
+    {
+     "text": "época",
+     "start": 9.258,
+     "end": 9.661,
+     "display": "época."
+    }
+   ],
+   "keywords": []
+  },
+  {
+   "id": "s4",
+   "title": "Generación 3 · IA desde el inicio",
+   "audio": "audio/s4.mp3",
+   "audioSeconds": 10.584,
+   "startSeconds": 26.333,
+   "frames": 671,
+   "words": [
+    {
+     "text": "Generación",
+     "start": 0.094,
+     "end": 0.645,
+     "display": "Generación"
+    },
+    {
+     "text": "tres",
+     "start": 0.656,
+     "end": 0.984,
+     "display": "tres,"
+    },
+    {
+     "text": "educación",
+     "start": 1.175,
+     "end": 1.673,
+     "display": "educación"
+    },
+    {
+     "text": "con",
+     "start": 1.683,
+     "end": 1.832,
+     "display": "con"
+    },
+    {
+     "text": "IA",
+     "start": 1.842,
+     "end": 2.149,
+     "display": "IA."
+    },
+    {
+     "text": "Lo",
+     "start": 2.871,
+     "end": 3.019,
+     "display": "Lo"
+    },
+    {
+     "text": "bueno",
+     "start": 3.03,
+     "end": 3.326,
+     "display": "bueno:"
+    },
+    {
+     "text": "diseñas",
+     "start": 3.58,
+     "end": 4.089,
+     "display": "diseñas,"
+    },
+    {
+     "text": "verificas",
+     "start": 4.28,
+     "end": 4.778,
+     "display": "verificas"
+    },
+    {
+     "text": "y",
+     "start": 4.788,
+     "end": 4.83,
+     "display": "y"
+    },
+    {
+     "text": "diriges",
+     "start": 4.841,
+     "end": 5.381,
+     "display": "diriges."
+    },
+    {
+     "text": "Lo",
+     "start": 6.112,
+     "end": 6.261,
+     "display": "Lo"
+    },
+    {
+     "text": "malo",
+     "start": 6.271,
+     "end": 6.578,
+     "display": "malo:"
+    },
+    {
+     "text": "nadie",
+     "start": 6.854,
+     "end": 7.097,
+     "display": "nadie"
+    },
+    {
+     "text": "sabe",
+     "start": 7.108,
+     "end": 7.362,
+     "display": "sabe"
+    },
+    {
+     "text": "qué",
+     "start": 7.373,
+     "end": 7.468,
+     "display": "qué"
+    },
+    {
+     "text": "enseñar",
+     "start": 7.479,
+     "end": 7.892,
+     "display": "enseñar,"
+    },
+    {
+     "text": "y",
+     "start": 8.136,
+     "end": 8.178,
+     "display": "y"
+    },
+    {
+     "text": "la",
+     "start": 8.189,
+     "end": 8.316,
+     "display": "la"
+    },
+    {
+     "text": "IA",
+     "start": 8.326,
+     "end": 8.517,
+     "display": "IA"
+    },
+    {
+     "text": "se",
+     "start": 8.528,
+     "end": 8.644,
+     "display": "se"
+    },
+    {
+     "text": "equivoca",
+     "start": 8.655,
+     "end": 9.089,
+     "display": "equivoca"
+    },
+    {
+     "text": "con",
+     "start": 9.1,
+     "end": 9.237,
+     "display": "con"
+    },
+    {
+     "text": "seguridad",
+     "start": 9.248,
+     "end": 9.831,
+     "display": "seguridad."
+    }
+   ],
+   "keywords": []
+  },
+  {
+   "id": "s5",
+   "title": "Cheat-sheet",
+   "audio": "audio/s5.mp3",
+   "audioSeconds": 8.856,
+   "startSeconds": 37.517,
+   "frames": 567,
+   "words": [
+    {
+     "text": "Resumen",
+     "start": 0.091,
+     "end": 0.644,
+     "display": "Resumen."
+    },
+    {
+     "text": "La",
+     "start": 1.352,
+     "end": 1.527,
+     "display": "La"
+    },
+    {
+     "text": "IA",
+     "start": 1.537,
+     "end": 1.711,
+     "display": "IA"
+    },
+    {
+     "text": "no",
+     "start": 1.721,
+     "end": 1.854,
+     "display": "no"
+    },
+    {
+     "text": "reemplaza",
+     "start": 1.865,
+     "end": 2.346,
+     "display": "reemplaza"
+    },
+    {
+     "text": "al",
+     "start": 2.357,
+     "end": 2.438,
+     "display": "al"
+    },
+    {
+     "text": "que",
+     "start": 2.449,
+     "end": 2.531,
+     "display": "que"
+    },
+    {
+     "text": "entiende",
+     "start": 2.541,
+     "end": 3.002,
+     "display": "entiende."
+    },
+    {
+     "text": "Reemplaza",
+     "start": 3.709,
+     "end": 4.232,
+     "display": "Reemplaza"
+    },
+    {
+     "text": "al",
+     "start": 4.242,
+     "end": 4.324,
+     "display": "al"
+    },
+    {
+     "text": "que",
+     "start": 4.334,
+     "end": 4.426,
+     "display": "que"
+    },
+    {
+     "text": "solo",
+     "start": 4.436,
+     "end": 4.693,
+     "display": "solo"
+    },
+    {
+     "text": "copia",
+     "start": 4.703,
+     "end": 5.072,
+     "display": "copia."
+    },
+    {
+     "text": "Guárdalo",
+     "start": 5.779,
+     "end": 6.281,
+     "display": "Guárdalo."
+    },
+    {
+     "text": "De",
+     "start": 6.998,
+     "end": 7.121,
+     "display": "¿De"
+    },
+    {
+     "text": "qué",
+     "start": 7.131,
+     "end": 7.254,
+     "display": "qué"
+    },
+    {
+     "text": "generación",
+     "start": 7.264,
+     "end": 7.746,
+     "display": "generación"
+    },
+    {
+     "text": "eres",
+     "start": 7.756,
+     "end": 8.135,
+     "display": "eres?"
+    }
+   ],
+   "keywords": []
+  }
+ ]
+}
