@@ -1,0 +1,27 @@
+{
+  "name": "neon-generaciones-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Video Dark Neon Explainer 9:16 60fps",
+  "scripts": {
+    "voice": "python3 scripts/generate_voice.py",
+    "studio": "remotion studio",
+    "still": "remotion still src/index.ts Video out/frame.png",
+    "render": "remotion render src/index.ts Video out/neon-generaciones.mp4 --codec=h264 --crf=18"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@remotion/cli": "4.0.546",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.546",
+    "@remotion/bundler": "4.0.546",
+    "@remotion/renderer": "4.0.546",
+    "@fontsource/plus-jakarta-sans": "^5.1.0",
+    "@remotion/paths": "4.0.546"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "^5.5.0"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "voice": "es-MX-JorgeNeural",
+  "fps": 60,
+  "leadSeconds": 0.2,
+  "tailSeconds": 0.35,
+  "scenes": [
+    {
+      "id": "s1",
+      "title": "Gancho",
+      "rate": "+14%",
+      "text": "Tres generaciones. Una verdad incómoda."
+    },
+    {
+      "id": "s2",
+      "title": "Divisor de capítulo",
+      "rate": "+14%",
+      "text": "Ganaron algo. Y perdieron algo."
+    },
+    {
+      "id": "s3",
+      "title": "Tarjetas apiladas",
+      "rate": "+14%",
+      "text": "Uno, sin IA: ganó fundamentos, perdió velocidad. Dos, con IA en el bolsillo: ganó velocidad, arriesga copiar. Tres, IA desde el inicio: gana poder para dirigir, pero nadie sabe enseñarla."
+    },
+    {
+      "id": "s4",
+      "title": "Dashboard + zoom",
+      "rate": "+14%",
+      "text": "Mi opinión: la IA no decide quién es buen ingeniero. Mira los datos: sube la velocidad, pero los fundamentos solo se sostienen si entiendes. Y sin criterio, la dependencia te hace rápido, y reemplazable."
+    },
+    {
+      "id": "s5",
+      "title": "Frase de impacto",
+      "rate": "+14%",
+      "text": "La IA no reemplaza al que entiende. Reemplaza al que solo copia."
+    },
+    {
+      "id": "s6",
+      "title": "Outro",
+      "rate": "+14%",
+      "text": "¿De qué generación eres? Cuéntalo en comentarios."
+    }
+  ]
+}
