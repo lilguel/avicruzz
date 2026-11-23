@@ -1,0 +1,119 @@
+{
+  "voice": "es-MX-JorgeNeural",
+  "fps": 30,
+  "leadSeconds": 0.45,
+  "tailSeconds": 0.55,
+  "scenes": [
+    {
+      "id": "s1",
+      "title": "Gancho",
+      "rate": "+0%",
+      "text": "Hay tres generaciones de ingenieros de software. Y ninguna aprendió igual.",
+      "keywords": [
+        {
+          "text": "3 GENERACIONES",
+          "anchor": "tres",
+          "color": "rainbow"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Generación 1: antes de la IA",
+      "rate": "+8%",
+      "text": "La primera generación aprendió sin inteligencia artificial. Todo se escribía a mano: horas leyendo documentación, buscando en foros y depurando errores línea por línea. Era lento, pero dejó algo valioso: fundamentos sólidos y la paciencia de entender cómo funciona cada pieza.",
+      "keywords": [
+        {
+          "text": "ANTES DE LA IA",
+          "anchor": "primera",
+          "color": "g1"
+        },
+        {
+          "text": "FUNDAMENTOS",
+          "anchor": "fundamentos",
+          "color": "g1"
+        },
+        {
+          "text": "PACIENCIA",
+          "anchor": "paciencia",
+          "color": "g1"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Generación 2: la transición",
+      "rate": "+10%",
+      "text": "La segunda generación es la de ahora. Estudiantes con IA en el bolsillo, pero dentro de un sistema educativo pensado para un mundo sin ella. Las tareas que antes tomaban días, la IA las resuelve en segundos. Y aparece el dilema: ¿usarla como atajo o como herramienta? Quienes la usan para entender, y no solo para copiar, encuentran algo poderoso: una luz que les explica, al instante, lo que antes tardaban semanas en descubrir.",
+      "keywords": [
+        {
+          "text": "LA TRANSICIÓN",
+          "anchor": "segunda",
+          "color": "g2"
+        },
+        {
+          "text": "¿ATAJO O HERRAMIENTA?",
+          "anchor": "dilema",
+          "color": "g2"
+        },
+        {
+          "text": "ILUMINACIÓN",
+          "anchor": "luz",
+          "color": "g2"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Generación 3: el futuro",
+      "rate": "+8%",
+      "text": "La tercera generación aún no llega. Será la que estudie en una educación diseñada con la IA desde el principio. Memorizar sintaxis importará menos, y el diseño de sistemas, el pensamiento crítico, la ética y saber verificar lo que la IA produce importarán más. El ingeniero dejará de ser solo quien escribe código y pasará a ser quien lo dirige.",
+      "keywords": [
+        {
+          "text": "EL FUTURO",
+          "anchor": "tercera",
+          "color": "g3"
+        },
+        {
+          "text": "DISEÑAR",
+          "anchor": "diseño",
+          "color": "g3"
+        },
+        {
+          "text": "VERIFICAR",
+          "anchor": "verificar",
+          "color": "g3"
+        },
+        {
+          "text": "DIRIGIR",
+          "anchor": "dirige",
+          "color": "g3"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Cierre",
+      "rate": "+5%",
+      "text": "La IA no reemplaza al ingeniero que entiende. Reemplaza al que solo copia. ¿Y tú, de qué generación eres?",
+      "keywords": [
+        {
+          "text": "ENTIENDE.",
+          "anchor": "entiende",
+          "color": "white"
+        },
+        {
+          "text": "NO COPIES.",
+          "anchor": "copia",
+          "color": "rainbow",
+          "append": true
+        },
+        {
+          "text": "¿DE QUÉ GENERACIÓN ERES?",
+          "anchor": "tú",
+          "color": "white"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1397 @@
+{
+ "fps": 30,
+ "leadSeconds": 0.45,
+ "voice": "es-MX-JorgeNeural",
+ "totalFrames": 2575,
+ "scenes": [
+  {
+   "id": "s1",
+   "title": "Gancho",
+   "audio": "audio/s1.mp3",
+   "audioSeconds": 5.928,
+   "startSeconds": 0.0,
+   "frames": 208,
+   "words": [
+    {
+     "text": "Hay",
+     "start": 0.1,
+     "end": 0.312,
+     "display": "Hay"
+    },
+    {
+     "text": "tres",
+     "start": 0.325,
+     "end": 0.575,
+     "display": "tres"
+    },
+    {
+     "text": "generaciones",
+     "start": 0.588,
+     "end": 1.288,
+     "display": "generaciones"
+    },
+    {
+     "text": "de",
+     "start": 1.3,
+     "end": 1.375,
+     "display": "de"
+    },
+    {
+     "text": "ingenieros",
+     "start": 1.387,
+     "end": 1.988,
+     "display": "ingenieros"
+    },
+    {
+     "text": "de",
+     "start": 2.0,
+     "end": 2.075,
+     "display": "de"
+    },
+    {
+     "text": "software",
+     "start": 2.087,
+     "end": 2.663,
+     "display": "software."
+    },
+    {
+     "text": "Y",
+     "start": 3.525,
+     "end": 3.65,
+     "display": "Y"
+    },
+    {
+     "text": "ninguna",
+     "start": 3.663,
+     "end": 4.112,
+     "display": "ninguna"
+    },
+    {
+     "text": "aprendió",
+     "start": 4.125,
+     "end": 4.6,
+     "display": "aprendió"
+    },
+    {
+     "text": "igual",
+     "start": 4.612,
+     "end": 5.05,
+     "display": "igual."
+    }
+   ],
+   "keywords": [
+    {
+     "text": "3 GENERACIONES",
+     "anchor": "tres",
+     "color": "rainbow",
+     "wordIndex": 1,
+     "at": 0.325
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Generación 1: antes de la IA",
+   "audio": "audio/s2.mp3",
+   "audioSeconds": 17.568,
+   "startSeconds": 6.933,
+   "frames": 557,
+   "words": [
+    {
+     "text": "La",
+     "start": 0.096,
+     "end": 0.258,
+     "display": "La"
+    },
+    {
+     "text": "primera",
+     "start": 0.27,
+     "end": 0.594,
+     "display": "primera"
+    },
+    {
+     "text": "generación",
+     "start": 0.606,
+     "end": 1.161,
+     "display": "generación"
+    },
+    {
+     "text": "aprendió",
+     "start": 1.173,
+     "end": 1.601,
+     "display": "aprendió"
+    },
+    {
+     "text": "sin",
+     "start": 1.613,
+     "end": 1.786,
+     "display": "sin"
+    },
+    {
+     "text": "inteligencia",
+     "start": 1.798,
+     "end": 2.457,
+     "display": "inteligencia"
+    },
+    {
+     "text": "artificial",
+     "start": 2.469,
+     "end": 3.106,
+     "display": "artificial."
+    },
+    {
+     "text": "Todo",
+     "start": 3.9,
+     "end": 4.12,
+     "display": "Todo"
+    },
+    {
+     "text": "se",
+     "start": 4.132,
+     "end": 4.248,
+     "display": "se"
+    },
+    {
+     "text": "escribía",
+     "start": 4.259,
+     "end": 4.757,
+     "display": "escribía"
+    },
+    {
+     "text": "a",
+     "start": 4.769,
+     "end": 4.803,
+     "display": "a"
+    },
+    {
+     "text": "mano",
+     "start": 4.815,
+     "end": 5.174,
+     "display": "mano:"
+    },
+    {
+     "text": "horas",
+     "start": 5.451,
+     "end": 5.729,
+     "display": "horas"
+    },
+    {
+     "text": "leyendo",
+     "start": 5.741,
+     "end": 6.076,
+     "display": "leyendo"
+    },
+    {
+     "text": "documentación",
+     "start": 6.088,
+     "end": 6.84,
+     "display": "documentación,"
+    },
+    {
+     "text": "buscando",
+     "start": 7.13,
+     "end": 7.535,
+     "display": "buscando"
+    },
+    {
+     "text": "en",
+     "start": 7.546,
+     "end": 7.639,
+     "display": "en"
+    },
+    {
+     "text": "foros",
+     "start": 7.65,
+     "end": 8.009,
+     "display": "foros"
+    },
+    {
+     "text": "y",
+     "start": 8.021,
+     "end": 8.067,
+     "display": "y"
+    },
+    {
+     "text": "depurando",
+     "start": 8.079,
+     "end": 8.542,
+     "display": "depurando"
+    },
+    {
+     "text": "errores",
+     "start": 8.553,
+     "end": 8.97,
+     "display": "errores"
+    },
+    {
+     "text": "línea",
+     "start": 8.982,
+     "end": 9.306,
+     "display": "línea"
+    },
+    {
+     "text": "por",
+     "start": 9.317,
+     "end": 9.502,
+     "display": "por"
+    },
+    {
+     "text": "línea",
+     "start": 9.514,
+     "end": 9.919,
+     "display": "línea."
+    },
+    {
+     "text": "Era",
+     "start": 10.718,
+     "end": 10.926,
+     "display": "Era"
+    },
+    {
+     "text": "lento",
+     "start": 10.938,
+     "end": 11.308,
+     "display": "lento,"
+    },
+    {
+     "text": "pero",
+     "start": 11.562,
+     "end": 11.748,
+     "display": "pero"
+    },
+    {
+     "text": "dejó",
+     "start": 11.759,
+     "end": 12.06,
+     "display": "dejó"
+    },
+    {
+     "text": "algo",
+     "start": 12.072,
+     "end": 12.28,
+     "display": "algo"
+    },
+    {
+     "text": "valioso",
+     "start": 12.292,
+     "end": 12.743,
+     "display": "valioso:"
+    },
+    {
+     "text": "fundamentos",
+     "start": 12.998,
+     "end": 13.576,
+     "display": "fundamentos"
+    },
+    {
+     "text": "sólidos",
+     "start": 13.588,
+     "end": 14.062,
+     "display": "sólidos"
+    },
+    {
+     "text": "y",
+     "start": 14.074,
+     "end": 14.12,
+     "display": "y"
+    },
+    {
+     "text": "la",
+     "start": 14.132,
+     "end": 14.236,
+     "display": "la"
+    },
+    {
+     "text": "paciencia",
+     "start": 14.248,
+     "end": 14.734,
+     "display": "paciencia"
+    },
+    {
+     "text": "de",
+     "start": 14.745,
+     "end": 14.826,
+     "display": "de"
+    },
+    {
+     "text": "entender",
+     "start": 14.838,
+     "end": 15.301,
+     "display": "entender"
+    },
+    {
+     "text": "cómo",
+     "start": 15.312,
+     "end": 15.544,
+     "display": "cómo"
+    },
+    {
+     "text": "funciona",
+     "start": 15.556,
+     "end": 16.018,
+     "display": "funciona"
+    },
+    {
+     "text": "cada",
+     "start": 16.03,
+     "end": 16.308,
+     "display": "cada"
+    },
+    {
+     "text": "pieza",
+     "start": 16.319,
+     "end": 16.748,
+     "display": "pieza."
+    }
+   ],
+   "keywords": [
+    {
+     "text": "ANTES DE LA IA",
+     "anchor": "primera",
+     "color": "g1",
+     "wordIndex": 1,
+     "at": 0.27
+    },
+    {
+     "text": "FUNDAMENTOS",
+     "anchor": "fundamentos",
+     "color": "g1",
+     "wordIndex": 30,
+     "at": 12.998
+    },
+    {
+     "text": "PACIENCIA",
+     "anchor": "paciencia",
+     "color": "g1",
+     "wordIndex": 34,
+     "at": 14.248
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Generación 2: la transición",
+   "audio": "audio/s3.mp3",
+   "audioSeconds": 27.0,
+   "startSeconds": 25.5,
+   "frames": 840,
+   "words": [
+    {
+     "text": "La",
+     "start": 0.095,
+     "end": 0.243,
+     "display": "La"
+    },
+    {
+     "text": "segunda",
+     "start": 0.255,
+     "end": 0.63,
+     "display": "segunda"
+    },
+    {
+     "text": "generación",
+     "start": 0.641,
+     "end": 1.164,
+     "display": "generación"
+    },
+    {
+     "text": "es",
+     "start": 1.175,
+     "end": 1.3,
+     "display": "es"
+    },
+    {
+     "text": "la",
+     "start": 1.311,
+     "end": 1.368,
+     "display": "la"
+    },
+    {
+     "text": "de",
+     "start": 1.38,
+     "end": 1.482,
+     "display": "de"
+    },
+    {
+     "text": "ahora",
+     "start": 1.493,
+     "end": 1.845,
+     "display": "ahora."
+    },
+    {
+     "text": "Estudiantes",
+     "start": 2.625,
+     "end": 3.261,
+     "display": "Estudiantes"
+    },
+    {
+     "text": "con",
+     "start": 3.273,
+     "end": 3.443,
+     "display": "con"
+    },
+    {
+     "text": "IA",
+     "start": 3.455,
+     "end": 3.614,
+     "display": "IA"
+    },
+    {
+     "text": "en",
+     "start": 3.625,
+     "end": 3.705,
+     "display": "en"
+    },
+    {
+     "text": "el",
+     "start": 3.716,
+     "end": 3.807,
+     "display": "el"
+    },
+    {
+     "text": "bolsillo",
+     "start": 3.818,
+     "end": 4.307,
+     "display": "bolsillo,"
+    },
+    {
+     "text": "pero",
+     "start": 4.591,
+     "end": 4.773,
+     "display": "pero"
+    },
+    {
+     "text": "dentro",
+     "start": 4.784,
+     "end": 5.08,
+     "display": "dentro"
+    },
+    {
+     "text": "de",
+     "start": 5.091,
+     "end": 5.182,
+     "display": "de"
+    },
+    {
+     "text": "un",
+     "start": 5.193,
+     "end": 5.318,
+     "display": "un"
+    },
+    {
+     "text": "sistema",
+     "start": 5.33,
+     "end": 5.705,
+     "display": "sistema"
+    },
+    {
+     "text": "educativo",
+     "start": 5.716,
+     "end": 6.25,
+     "display": "educativo"
+    },
+    {
+     "text": "pensado",
+     "start": 6.261,
+     "end": 6.716,
+     "display": "pensado"
+    },
+    {
+     "text": "para",
+     "start": 6.727,
+     "end": 6.943,
+     "display": "para"
+    },
+    {
+     "text": "un",
+     "start": 6.955,
+     "end": 7.091,
+     "display": "un"
+    },
+    {
+     "text": "mundo",
+     "start": 7.102,
+     "end": 7.409,
+     "display": "mundo"
+    },
+    {
+     "text": "sin",
+     "start": 7.42,
+     "end": 7.614,
+     "display": "sin"
+    },
+    {
+     "text": "ella",
+     "start": 7.625,
+     "end": 7.932,
+     "display": "ella."
+    },
+    {
+     "text": "Las",
+     "start": 8.716,
+     "end": 8.92,
+     "display": "Las"
+    },
+    {
+     "text": "tareas",
+     "start": 8.932,
+     "end": 9.284,
+     "display": "tareas"
+    },
+    {
+     "text": "que",
+     "start": 9.295,
+     "end": 9.42,
+     "display": "que"
+    },
+    {
+     "text": "antes",
+     "start": 9.432,
+     "end": 9.739,
+     "display": "antes"
+    },
+    {
+     "text": "tomaban",
+     "start": 9.75,
+     "end": 10.148,
+     "display": "tomaban"
+    },
+    {
+     "text": "días",
+     "start": 10.159,
+     "end": 10.511,
+     "display": "días,"
+    },
+    {
+     "text": "la",
+     "start": 10.75,
+     "end": 10.875,
+     "display": "la"
+    },
+    {
+     "text": "IA",
+     "start": 10.886,
+     "end": 11.091,
+     "display": "IA"
+    },
+    {
+     "text": "las",
+     "start": 11.102,
+     "end": 11.273,
+     "display": "las"
+    },
+    {
+     "text": "resuelve",
+     "start": 11.284,
+     "end": 11.67,
+     "display": "resuelve"
+    },
+    {
+     "text": "en",
+     "start": 11.682,
+     "end": 11.761,
+     "display": "en"
+    },
+    {
+     "text": "segundos",
+     "start": 11.773,
+     "end": 12.375,
+     "display": "segundos."
+    },
+    {
+     "text": "Y",
+     "start": 13.159,
+     "end": 13.295,
+     "display": "Y"
+    },
+    {
+     "text": "aparece",
+     "start": 13.307,
+     "end": 13.705,
+     "display": "aparece"
+    },
+    {
+     "text": "el",
+     "start": 13.716,
+     "end": 13.773,
+     "display": "el"
+    },
+    {
+     "text": "dilema",
+     "start": 13.784,
+     "end": 14.17,
+     "display": "dilema:"
+    },
+    {
+     "text": "usarla",
+     "start": 14.455,
+     "end": 14.852,
+     "display": "¿usarla"
+    },
+    {
+     "text": "como",
+     "start": 14.864,
+     "end": 15.08,
+     "display": "como"
+    },
+    {
+     "text": "atajo",
+     "start": 15.091,
+     "end": 15.5,
+     "display": "atajo"
+    },
+    {
+     "text": "o",
+     "start": 15.511,
+     "end": 15.614,
+     "display": "o"
+    },
+    {
+     "text": "como",
+     "start": 15.625,
+     "end": 15.83,
+     "display": "como"
+    },
+    {
+     "text": "herramienta",
+     "start": 15.841,
+     "end": 16.398,
+     "display": "herramienta?"
+    },
+    {
+     "text": "Quienes",
+     "start": 17.193,
+     "end": 17.523,
+     "display": "Quienes"
+    },
+    {
+     "text": "la",
+     "start": 17.534,
+     "end": 17.625,
+     "display": "la"
+    },
+    {
+     "text": "usan",
+     "start": 17.636,
+     "end": 17.909,
+     "display": "usan"
+    },
+    {
+     "text": "para",
+     "start": 17.92,
+     "end": 18.08,
+     "display": "para"
+    },
+    {
+     "text": "entender",
+     "start": 18.091,
+     "end": 18.511,
+     "display": "entender,"
+    },
+    {
+     "text": "y",
+     "start": 18.784,
+     "end": 18.83,
+     "display": "y"
+    },
+    {
+     "text": "no",
+     "start": 18.841,
+     "end": 19.0,
+     "display": "no"
+    },
+    {
+     "text": "solo",
+     "start": 19.011,
+     "end": 19.284,
+     "display": "solo"
+    },
+    {
+     "text": "para",
+     "start": 19.295,
+     "end": 19.477,
+     "display": "para"
+    },
+    {
+     "text": "copiar",
+     "start": 19.489,
+     "end": 19.83,
+     "display": "copiar,"
+    },
+    {
+     "text": "encuentran",
+     "start": 20.136,
+     "end": 20.614,
+     "display": "encuentran"
+    },
+    {
+     "text": "algo",
+     "start": 20.625,
+     "end": 20.852,
+     "display": "algo"
+    },
+    {
+     "text": "poderoso",
+     "start": 20.864,
+     "end": 21.398,
+     "display": "poderoso:"
+    },
+    {
+     "text": "una",
+     "start": 21.67,
+     "end": 21.83,
+     "display": "una"
+    },
+    {
+     "text": "luz",
+     "start": 21.841,
+     "end": 22.057,
+     "display": "luz"
+    },
+    {
+     "text": "que",
+     "start": 22.068,
+     "end": 22.17,
+     "display": "que"
+    },
+    {
+     "text": "les",
+     "start": 22.182,
+     "end": 22.341,
+     "display": "les"
+    },
+    {
+     "text": "explica",
+     "start": 22.352,
+     "end": 22.841,
+     "display": "explica,"
+    },
+    {
+     "text": "al",
+     "start": 23.068,
+     "end": 23.227,
+     "display": "al"
+    },
+    {
+     "text": "instante",
+     "start": 23.239,
+     "end": 23.761,
+     "display": "instante,"
+    },
+    {
+     "text": "lo",
+     "start": 24.057,
+     "end": 24.148,
+     "display": "lo"
+    },
+    {
+     "text": "que",
+     "start": 24.159,
+     "end": 24.284,
+     "display": "que"
+    },
+    {
+     "text": "antes",
+     "start": 24.295,
+     "end": 24.602,
+     "display": "antes"
+    },
+    {
+     "text": "tardaban",
+     "start": 24.614,
+     "end": 25.057,
+     "display": "tardaban"
+    },
+    {
+     "text": "semanas",
+     "start": 25.068,
+     "end": 25.511,
+     "display": "semanas"
+    },
+    {
+     "text": "en",
+     "start": 25.523,
+     "end": 25.602,
+     "display": "en"
+    },
+    {
+     "text": "descubrir",
+     "start": 25.614,
+     "end": 26.205,
+     "display": "descubrir."
+    }
+   ],
+   "keywords": [
+    {
+     "text": "LA TRANSICIÓN",
+     "anchor": "segunda",
+     "color": "g2",
+     "wordIndex": 1,
+     "at": 0.255
+    },
+    {
+     "text": "¿ATAJO O HERRAMIENTA?",
+     "anchor": "dilema",
+     "color": "g2",
+     "wordIndex": 40,
+     "at": 13.784
+    },
+    {
+     "text": "ILUMINACIÓN",
+     "anchor": "luz",
+     "color": "g2",
+     "wordIndex": 61,
+     "at": 21.841
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Generación 3: el futuro",
+   "audio": "audio/s4.mp3",
+   "audioSeconds": 21.816,
+   "startSeconds": 53.5,
+   "frames": 684,
+   "words": [
+    {
+     "text": "La",
+     "start": 0.096,
+     "end": 0.247,
+     "display": "La"
+    },
+    {
+     "text": "tercera",
+     "start": 0.258,
+     "end": 0.663,
+     "display": "tercera"
+    },
+    {
+     "text": "generación",
+     "start": 0.675,
+     "end": 1.242,
+     "display": "generación"
+    },
+    {
+     "text": "aún",
+     "start": 1.254,
+     "end": 1.462,
+     "display": "aún"
+    },
+    {
+     "text": "no",
+     "start": 1.474,
+     "end": 1.589,
+     "display": "no"
+    },
+    {
+     "text": "llega",
+     "start": 1.601,
+     "end": 1.96,
+     "display": "llega."
+    },
+    {
+     "text": "Será",
+     "start": 2.755,
+     "end": 3.09,
+     "display": "Será"
+    },
+    {
+     "text": "la",
+     "start": 3.102,
+     "end": 3.206,
+     "display": "la"
+    },
+    {
+     "text": "que",
+     "start": 3.218,
+     "end": 3.333,
+     "display": "que"
+    },
+    {
+     "text": "estudie",
+     "start": 3.345,
+     "end": 3.738,
+     "display": "estudie"
+    },
+    {
+     "text": "en",
+     "start": 3.75,
+     "end": 3.843,
+     "display": "en"
+    },
+    {
+     "text": "una",
+     "start": 3.854,
+     "end": 3.993,
+     "display": "una"
+    },
+    {
+     "text": "educación",
+     "start": 4.005,
+     "end": 4.433,
+     "display": "educación"
+    },
+    {
+     "text": "diseñada",
+     "start": 4.444,
+     "end": 4.965,
+     "display": "diseñada"
+    },
+    {
+     "text": "con",
+     "start": 4.977,
+     "end": 5.15,
+     "display": "con"
+    },
+    {
+     "text": "la",
+     "start": 5.162,
+     "end": 5.278,
+     "display": "la"
+    },
+    {
+     "text": "IA",
+     "start": 5.289,
+     "end": 5.498,
+     "display": "IA"
+    },
+    {
+     "text": "desde",
+     "start": 5.509,
+     "end": 5.775,
+     "display": "desde"
+    },
+    {
+     "text": "el",
+     "start": 5.787,
+     "end": 5.868,
+     "display": "el"
+    },
+    {
+     "text": "principio",
+     "start": 5.88,
+     "end": 6.447,
+     "display": "principio."
+    },
+    {
+     "text": "Memorizar",
+     "start": 7.245,
+     "end": 7.801,
+     "display": "Memorizar"
+    },
+    {
+     "text": "sintaxis",
+     "start": 7.812,
+     "end": 8.38,
+     "display": "sintaxis"
+    },
+    {
+     "text": "importará",
+     "start": 8.391,
+     "end": 8.866,
+     "display": "importará"
+    },
+    {
+     "text": "menos",
+     "start": 8.877,
+     "end": 9.271,
+     "display": "menos,"
+    },
+    {
+     "text": "y",
+     "start": 9.502,
+     "end": 9.595,
+     "display": "y"
+    },
+    {
+     "text": "el",
+     "start": 9.607,
+     "end": 9.688,
+     "display": "el"
+    },
+    {
+     "text": "diseño",
+     "start": 9.699,
+     "end": 10.093,
+     "display": "diseño"
+    },
+    {
+     "text": "de",
+     "start": 10.104,
+     "end": 10.197,
+     "display": "de"
+    },
+    {
+     "text": "sistemas",
+     "start": 10.208,
+     "end": 10.775,
+     "display": "sistemas,"
+    },
+    {
+     "text": "el",
+     "start": 11.018,
+     "end": 11.146,
+     "display": "el"
+    },
+    {
+     "text": "pensamiento",
+     "start": 11.157,
+     "end": 11.713,
+     "display": "pensamiento"
+    },
+    {
+     "text": "crítico",
+     "start": 11.725,
+     "end": 12.187,
+     "display": "crítico,"
+    },
+    {
+     "text": "la",
+     "start": 12.477,
+     "end": 12.616,
+     "display": "la"
+    },
+    {
+     "text": "ética",
+     "start": 12.627,
+     "end": 12.963,
+     "display": "ética"
+    },
+    {
+     "text": "y",
+     "start": 12.975,
+     "end": 13.021,
+     "display": "y"
+    },
+    {
+     "text": "saber",
+     "start": 13.032,
+     "end": 13.345,
+     "display": "saber"
+    },
+    {
+     "text": "verificar",
+     "start": 13.357,
+     "end": 13.866,
+     "display": "verificar"
+    },
+    {
+     "text": "lo",
+     "start": 13.877,
+     "end": 13.981,
+     "display": "lo"
+    },
+    {
+     "text": "que",
+     "start": 13.993,
+     "end": 14.109,
+     "display": "que"
+    },
+    {
+     "text": "la",
+     "start": 14.12,
+     "end": 14.236,
+     "display": "la"
+    },
+    {
+     "text": "IA",
+     "start": 14.248,
+     "end": 14.468,
+     "display": "IA"
+    },
+    {
+     "text": "produce",
+     "start": 14.479,
+     "end": 14.896,
+     "display": "produce"
+    },
+    {
+     "text": "importarán",
+     "start": 14.907,
+     "end": 15.463,
+     "display": "importarán"
+    },
+    {
+     "text": "más",
+     "start": 15.475,
+     "end": 15.868,
+     "display": "más."
+    },
+    {
+     "text": "El",
+     "start": 16.667,
+     "end": 16.829,
+     "display": "El"
+    },
+    {
+     "text": "ingeniero",
+     "start": 16.84,
+     "end": 17.303,
+     "display": "ingeniero"
+    },
+    {
+     "text": "dejará",
+     "start": 17.315,
+     "end": 17.627,
+     "display": "dejará"
+    },
+    {
+     "text": "de",
+     "start": 17.639,
+     "end": 17.743,
+     "display": "de"
+    },
+    {
+     "text": "ser",
+     "start": 17.755,
+     "end": 17.998,
+     "display": "ser"
+    },
+    {
+     "text": "solo",
+     "start": 18.009,
+     "end": 18.299,
+     "display": "solo"
+    },
+    {
+     "text": "quien",
+     "start": 18.31,
+     "end": 18.484,
+     "display": "quien"
+    },
+    {
+     "text": "escribe",
+     "start": 18.495,
+     "end": 18.889,
+     "display": "escribe"
+    },
+    {
+     "text": "código",
+     "start": 18.9,
+     "end": 19.387,
+     "display": "código"
+    },
+    {
+     "text": "y",
+     "start": 19.398,
+     "end": 19.468,
+     "display": "y"
+    },
+    {
+     "text": "pasará",
+     "start": 19.479,
+     "end": 19.919,
+     "display": "pasará"
+    },
+    {
+     "text": "a",
+     "start": 19.931,
+     "end": 19.977,
+     "display": "a"
+    },
+    {
+     "text": "ser",
+     "start": 19.988,
+     "end": 20.243,
+     "display": "ser"
+    },
+    {
+     "text": "quien",
+     "start": 20.255,
+     "end": 20.44,
+     "display": "quien"
+    },
+    {
+     "text": "lo",
+     "start": 20.451,
+     "end": 20.521,
+     "display": "lo"
+    },
+    {
+     "text": "dirige",
+     "start": 20.532,
+     "end": 20.995,
+     "display": "dirige."
+    }
+   ],
+   "keywords": [
+    {
+     "text": "EL FUTURO",
+     "anchor": "tercera",
+     "color": "g3",
+     "wordIndex": 1,
+     "at": 0.258
+    },
+    {
+     "text": "DISEÑAR",
+     "anchor": "diseño",
+     "color": "g3",
+     "wordIndex": 26,
+     "at": 9.699
+    },
+    {
+     "text": "VERIFICAR",
+     "anchor": "verificar",
+     "color": "g3",
+     "wordIndex": 36,
+     "at": 13.357
+    },
+    {
+     "text": "DIRIGIR",
+     "anchor": "dirige",
+     "color": "g3",
+     "wordIndex": 59,
+     "at": 20.532
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "title": "Cierre",
+   "audio": "audio/s5.mp3",
+   "audioSeconds": 8.52,
+   "startSeconds": 76.3,
+   "frames": 286,
+   "words": [
+    {
+     "text": "La",
+     "start": 0.098,
+     "end": 0.288,
+     "display": "La"
+    },
+    {
+     "text": "IA",
+     "start": 0.3,
+     "end": 0.514,
+     "display": "IA"
+    },
+    {
+     "text": "no",
+     "start": 0.526,
+     "end": 0.681,
+     "display": "no"
+    },
+    {
+     "text": "reemplaza",
+     "start": 0.693,
+     "end": 1.229,
+     "display": "reemplaza"
+    },
+    {
+     "text": "al",
+     "start": 1.24,
+     "end": 1.324,
+     "display": "al"
+    },
+    {
+     "text": "ingeniero",
+     "start": 1.336,
+     "end": 1.871,
+     "display": "ingeniero"
+    },
+    {
+     "text": "que",
+     "start": 1.883,
+     "end": 1.99,
+     "display": "que"
+    },
+    {
+     "text": "entiende",
+     "start": 2.002,
+     "end": 2.538,
+     "display": "entiende."
+    },
+    {
+     "text": "Reemplaza",
+     "start": 3.357,
+     "end": 3.964,
+     "display": "Reemplaza"
+    },
+    {
+     "text": "al",
+     "start": 3.976,
+     "end": 4.071,
+     "display": "al"
+    },
+    {
+     "text": "que",
+     "start": 4.083,
+     "end": 4.19,
+     "display": "que"
+    },
+    {
+     "text": "solo",
+     "start": 4.202,
+     "end": 4.5,
+     "display": "solo"
+    },
+    {
+     "text": "copia",
+     "start": 4.512,
+     "end": 4.94,
+     "display": "copia."
+    },
+    {
+     "text": "Y",
+     "start": 5.762,
+     "end": 5.905,
+     "display": "¿Y"
+    },
+    {
+     "text": "tú",
+     "start": 5.917,
+     "end": 6.143,
+     "display": "tú,"
+    },
+    {
+     "text": "de",
+     "start": 6.393,
+     "end": 6.488,
+     "display": "de"
+    },
+    {
+     "text": "qué",
+     "start": 6.5,
+     "end": 6.643,
+     "display": "qué"
+    },
+    {
+     "text": "generación",
+     "start": 6.655,
+     "end": 7.226,
+     "display": "generación"
+    },
+    {
+     "text": "eres",
+     "start": 7.238,
+     "end": 7.679,
+     "display": "eres?"
+    }
+   ],
+   "keywords": [
+    {
+     "text": "ENTIENDE.",
+     "anchor": "entiende",
+     "color": "white",
+     "wordIndex": 7,
+     "at": 2.002
+    },
+    {
+     "text": "NO COPIES.",
+     "anchor": "copia",
+     "color": "rainbow",
+     "append": true,
+     "wordIndex": 12,
+     "at": 4.512
+    },
+    {
+     "text": "¿DE QUÉ GENERACIÓN ERES?",
+     "anchor": "tú",
+     "color": "white",
+     "wordIndex": 14,
+     "at": 5.917
+    }
+   ]
+  }
+ ]
+}
